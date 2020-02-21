@@ -13,6 +13,7 @@ return [
     'controllerNamespace' => 'frontend\controllers',
     'components'          => [
         'request'      => [
+            'baseUrl'   => '',
             'csrfParam' => '_csrf-frontend',
         ],
         'user'         => [
@@ -40,9 +41,14 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName'  => false,
             'rules'           => [
+                ''         => 'site/index',
+                '<action>' => 'site/<action>',
             ],
         ],
-
+        'assetManager' => [
+            'basePath' => '@webroot/assets',
+            'baseUrl'  => '@web/assets',
+        ],
     ],
     'params'              => $params,
 ];
