@@ -1,6 +1,6 @@
 <?php
 return [
-    'aliases' => [
+    'aliases'    => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
@@ -9,5 +9,18 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'i18n'  => [
+            'translations' => [
+                '*' => [
+                    'class'    => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@frontend/messages',
+                    'fileMap'  => [
+                        'app' => 'app.php',
+                    ],
+                ],
+            ],
+        ],
     ],
+    'params'     => $params,
+    'language'   => 'ru-RU',
 ];

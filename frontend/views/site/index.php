@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+$this->title = 'bubutest';
 ?>
 <div class="site-index">
 
@@ -11,12 +11,10 @@ $this->title = 'My Yii Application';
 
         <p class="lead">Демонстрация приложения на Yii2.</p>
 
-        <p><a class="btn btn-lg btn-success" href="region">Страны</a></p>
+        <p><a class="btn btn-lg btn-success" href="/region/">Популяция городов</a></p>
     </div>
 
     <div class="body-content">
-
-
 
     </div>
 </div>

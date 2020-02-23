@@ -51,4 +51,5 @@ return [
         ],
     ],
     'params'              => $params,
+    'name'                => 'Mikech bubutes app',
 ];
