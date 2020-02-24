@@ -61,10 +61,10 @@ class CitySearch extends City
             ],
             'sort'       => [
                 'attributes'   => [
-                    'country.title',  /*   => [
+                    'countryTitle' => [
                         'asc'  => ['country.title' => SORT_ASC],
                         'desc' => ['country.title' => SORT_DESC],
-                    ],*/
+                    ],
                     'title',
                     'population',
                 ],
