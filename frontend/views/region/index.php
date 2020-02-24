@@ -24,8 +24,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'itemOptions'  => ['class' => 'div'],
         'layout'       => '{items}{pager}',
         'itemView'     => function($model, $key, $index, $widget) {
-            return Html::tag('h2', Html::a(Html::encode($model->title), ['view', 'id' => $model->id]))
-                   . $this->render('_citiesBlock', ['region' => $model]);
+            return
+                // Заголовок региона
+                Html::tag('h2', Html::encode($model->title))
+                // Грид с городами
+                . $this->render('_citiesBlock', ['region' => $model]);
         },
     ]) ?>
 

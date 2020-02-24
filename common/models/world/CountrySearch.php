@@ -4,7 +4,6 @@ namespace common\models\world;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\world\Region;
 
 /**
  * RegionSearch represents the model behind the search form of `common\models\world\Region`.
@@ -40,7 +39,7 @@ class CountrySearch extends Country
      */
     public function search($params)
     {
-        $query = Country::find();
+        $query = Country::find()->alias('country');
 
         // add conditions that should always apply here
 

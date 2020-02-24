@@ -4,7 +4,6 @@ namespace common\models\world;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\world\Region;
 
 /**
  * RegionSearch represents the model behind the search form of `common\models\world\Region`.
@@ -18,7 +17,7 @@ class RegionSearch extends Region
     {
         return [
             [['id'], 'integer'],
-            [['title', 'description', 'find'], 'safe'],
+            [['title', 'description'], 'safe'],
         ];
     }
 
@@ -84,8 +83,8 @@ class RegionSearch extends Region
     public function searchWithCities($params)
     {
         $query = City::find()
-                     ->leftJoin('countries', 'cities.country_id = countries.id')
-                     ->where(['countries.region_id' => $this->id]);;
+                     ->leftJoin('{{%countries}}', '{{%cities}}.country_id = {{%countries}}.id')
+                     ->where(['{{%countries}}.region_id' => $this->id]);;
 
         // add conditions that should always apply here
 
@@ -93,7 +92,7 @@ class RegionSearch extends Region
             'query' => $query,
             'sort'  => [
                 'defaultOrder' => [
-                    'cities.population' => SORT_DESC,
+                    '{{%cities}}.population' => SORT_DESC,
                 ],
             ],
         ]);
@@ -113,7 +112,7 @@ class RegionSearch extends Region
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['ilike', 'cities.title', $this->title]);
+        $query->andFilterWhere(['ilike', '{{%cities}}.title', $this->title]);
 
         return $dataProvider;
     }

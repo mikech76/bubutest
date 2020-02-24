@@ -2,10 +2,7 @@
 
 namespace common\models\world;
 
-use Yii;
 use yii\db\ActiveRecord;
-use common\models\world\Country;
-use common\models\world\City;
 
 /**
  * This is the model class for table "regions".
@@ -23,7 +20,7 @@ class Region extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'regions';
+        return '{{%regions}}';
     }
 
     /**
@@ -59,7 +56,9 @@ class Region extends \yii\db\ActiveRecord
      */
     public function getCountries()
     {
-        return $this->hasMany(Country::class, ['region_id' => 'id']);
+        return $this->hasMany(Country::class, ['region_id' => 'id'])
+                    ->orderBy(['title' => SORT_ASC])
+                    ->inverseOf('region');
     }
 
     /**
@@ -68,8 +67,9 @@ class Region extends \yii\db\ActiveRecord
     public function getCities()
     {
         return City::find()
-                   ->leftJoin('countries', 'cities.country_id = countries.id')
-                   ->where(['countries.region_id' => $this->id]);
+                   ->leftJoin(Country::tableName(), City::tableName() . '.country_id = ' . Country::tableName() . '.id')
+            //  ->leftJoin('countries', '{{%cities}}.country_id = {{%countries}}.id')
+                   ->where(['{{%countries}}.region_id' => $this->id]);
     }
 
     public function behaviors()

@@ -13,7 +13,7 @@ class m200221_125048_create_tables_4world extends Migration
     public function safeUp()
     {
         // Регионы
-        $this->createTable('regions', [
+        $this->createTable('{{%regions}}', [
             'id'          => $this->primaryKey(),
             'title'       => $this->string(255)->notNull()->unique(),
             'description' => $this->text(),
@@ -23,7 +23,7 @@ class m200221_125048_create_tables_4world extends Migration
 
         // Страны
 
-        $this->createTable('countries', [
+        $this->createTable('{{%countries}}', [
             'id'          => $this->primaryKey(),
             'region_id'   => $this->integer()->notNull(),
             'title'       => $this->string(255)->notNull()->unique(),
@@ -34,21 +34,21 @@ class m200221_125048_create_tables_4world extends Migration
 
         $this->createIndex(
             'idx-countries-region_id',
-            'countries',
+            '{{%countries}}',
             'region_id',
             );
 
         $this->addForeignKey(
             'fk-countries-region_id',
-            'countries',
+            '{{%countries}}',
             'region_id',
-            'regions',
+            '{{%regions}}',
             'id',
             'CASCADE'
         );
 
         // Города
-        $this->createTable('cities', [
+        $this->createTable('{{%cities}}', [
             'id'          => $this->primaryKey(),
             'country_id'  => $this->integer()->notNull(),
             'title'       => $this->string(255)->notNull()->unique(),
@@ -60,15 +60,15 @@ class m200221_125048_create_tables_4world extends Migration
 
         $this->createIndex(
             'idx-cities-country_id',
-            'cities',
+            '{{%cities}}',
             'country_id'
         );
 
         $this->addForeignKey(
             'fk-cities-country_id',
-            'cities',
+            '{{%cities}}',
             'country_id',
-            'countries',
+            '{{%countries}}',
             'id',
             'CASCADE'
         );
@@ -79,9 +79,9 @@ class m200221_125048_create_tables_4world extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('cities');
-        $this->dropTable('countries');
-        $this->dropTable('regions');
+        $this->dropTable('{{%cities}}');
+        $this->dropTable('{{%countries}}');
+        $this->dropTable('{{%regions}}');
 
         return true;
     }

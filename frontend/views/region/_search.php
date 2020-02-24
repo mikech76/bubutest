@@ -1,6 +1,5 @@
 <?php
 
-use common\models\world\CitySearch;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -18,9 +17,9 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'countryTitle') ?>
+    <?= $form->field($model, 'countryTitle')->textInput(['placeholder' => 'по части строки']) ?>
 
-    <?= $form->field($model, 'title') ?>
+    <?= $form->field($model, 'title')->textInput(['placeholder' => 'по части строки']) ?>
 
 
     <div class="form-group">

@@ -1,9 +1,11 @@
 <?php
 
-use yii\db\Migration;
-use common\models\world\Region;
-use common\models\world\Country;
+use common\models\User;
 use common\models\world\City;
+use common\models\world\Country;
+use common\models\world\Region;
+use yii\db\Migration;
+
 
 /**
  * Class m200221_184654_data2world
@@ -12,9 +14,22 @@ class m200221_184654_data2world extends Migration
 {
     /**
      * {@inheritdoc}
+     * @throws \yii\db\Exception
      */
     public function safeUp()
     {
+        // тестовый юзер  mikech/123123
+        Yii::$app->db->createCommand()->insert('user', [
+            'username'      => 'mikech',
+            'auth_key'      => 'd4QRh6LS9yBAB00rzKgSTN4-xqeJcabf',
+            'password_hash' => '$2y$13$vh/BDitzDnrQErS63xNTkOz4PYTh.L256zr9yI1eSx4CnKSOBpTjq',
+            'email'         => 'mikech76@gmail.com',
+            'status'        => 10,
+            'created_at'    => 'NOW()',
+            'updated_at'    => 'NOW()',
+        ])->execute();
+
+        // тестовые данные
         $file = file(__DIR__ . '/data-world.csv');
         foreach ($file as $item) {
             [$region, $country, $city, $population] = explode(';', $item);

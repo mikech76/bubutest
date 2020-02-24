@@ -24,7 +24,7 @@ class City extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'cities';
+        return '{{%cities}}';
     }
 
     /**

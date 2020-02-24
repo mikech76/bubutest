@@ -4,7 +4,6 @@ namespace common\models\world;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\world\Country;
 
 /**
  * CitySearch represents the model behind the search form of `common\models\world\City`.
@@ -43,7 +42,7 @@ class CitySearch extends City
     public function search($params)
     {
         //d($params);
-        $query = City::find()->joinWith('country');
+        $query = City::find()->alias('city')->joinWith('country country');
 
         $region_id = $params['CitySearch']['region_id'] ?? 0;
 
@@ -62,10 +61,10 @@ class CitySearch extends City
             ],
             'sort'       => [
                 'attributes'   => [
-                    'country.title' => [
-                        'asc'  => ['countries.title' => SORT_ASC],
-                        'desc' => ['countries.title' => SORT_DESC],
-                    ],
+                    'country.title',  /*   => [
+                        'asc'  => ['country.title' => SORT_ASC],
+                        'desc' => ['country.title' => SORT_DESC],
+                    ],*/
                     'title',
                     'population',
                 ],
@@ -90,10 +89,10 @@ class CitySearch extends City
             'population' => $this->population,
         ]);
 
-        $query->andFilterWhere(['ilike', 'cities.title', $this->title])
-              ->andFilterWhere(['ilike', 'cities.description', $this->description])
-              ->andFilterWhere(['ilike', 'countries.title', $this->countryTitle]);
 
+        $query->andFilterWhere(['ilike', 'city.title', $this->title])
+              ->andFilterWhere(['ilike', 'city.description', $this->description])
+              ->andFilterWhere(['ilike', 'country.title', $this->countryTitle]);
 
         return $dataProvider;
     }

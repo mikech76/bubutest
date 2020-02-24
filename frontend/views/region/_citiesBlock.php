@@ -1,8 +1,8 @@
 <?php
 
 use common\models\world\CitySearch;
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\ArrayHelper;
 
 /**
  * @var $searchModel        common\models\world\CountrySearch
@@ -28,7 +28,13 @@ echo GridView::widget([
     'filterModel'  => $searchModel,
     'columns'      => [
         ['class' => 'yii\grid\SerialColumn'],
-        'country.title',
+        //   'country.title',
+
+        [
+            'attribute' => 'countryTitle',
+            'value'     => 'country.title',
+            'filter'    => ArrayHelper::map($region->countries, 'title', 'title'),
+        ],
         'title',
         'population',
     ],

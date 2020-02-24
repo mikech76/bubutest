@@ -23,7 +23,7 @@ class Country extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'countries';
+        return '{{%countries}}';
     }
 
     /**
@@ -55,9 +55,20 @@ class Country extends \yii\db\ActiveRecord
         ];
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRegion()
+    {
+        return $this->hasOne(Region::class, ['id' => 'region_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getCities()
     {
-        return $this->hasMany(City::class, ['country_id' => 'id']);
+        return $this->hasMany(City::class, ['country_id' => 'id'])->inverseOf('country');;
     }
 
     public function behaviors()
